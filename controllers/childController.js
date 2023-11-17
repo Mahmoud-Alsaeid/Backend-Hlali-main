@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const jwt = require("jsonwebtoken");
 
 const Child = require("../models/childModel");
 
@@ -9,6 +10,17 @@ const getChild = asyncHandler(async (req, res) => {
   const Childs = await Child.find();
   res.status(200).json(Childs);
 });
+
+
+
+const getChildById = asyncHandler(async (req,res)=> {
+  const child = await Child.findById(req.params.id).populate('goal').populate('task').populate('RequestTask')
+  const parentId = child.parentId
+  const brothers = await Child.find({parentId})
+  res.status(200).json({
+    child,
+    brothers})
+})
 
 // @desc    Set Class
 // @route   POST /api/class
@@ -34,6 +46,31 @@ const setChild = asyncHandler(async (req, res) => {
   });
 
   res.status(200).json(Childs);
+});
+
+
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+}; 
+
+
+const loginChild = asyncHandler(async (req, res) => {
+
+  const child = await Child.findById(req.params.id);
+
+  if (child) {
+    res.json({
+      _id: child.id,
+      name: child.name,
+      userName: child.userName,
+      token: generateToken(child._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid credentials");
+  }
 });
 
 // @desc    Update Child
@@ -75,4 +112,6 @@ module.exports = {
   setChild,
   updateChild,
   deleteChild,
+  loginChild,
+  getChildById,
 };

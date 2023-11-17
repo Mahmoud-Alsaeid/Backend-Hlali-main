@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
+    requestTask:[ { type: mongoose.Schema.Types.ObjectId, ref: "RequestTask" , populate: true}],
+    task: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" , populate: true}],
+
+
   },
   {
     timestamps: true,

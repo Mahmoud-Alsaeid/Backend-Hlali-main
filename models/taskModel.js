@@ -4,24 +4,27 @@ const taskSchema = mongoose.Schema(
   {
     parentId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     typeTask: {
-      type: String,
+      type: Number,
       required: [true, "Please add a name"],
     },
     name: {
       type: String,
       required: [true, "Please add a name"],
     },
-    doc: {
-      type: String,
-      required: [true, "Please add a name"],
-    },
-    day: {
+    desc: {
       type: String,
       required: [true, "Please add a name"],
     },
     time: {
       type: String,
       required: [true, "Please add a name"],
+    },
+    valueTask : {
+      type : Number,
+    },
+     status:{
+      type:Boolean,
+      default : false
     },
 
     // childTask: {

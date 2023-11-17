@@ -4,15 +4,15 @@ const goalSchema = mongoose.Schema(
   {
     parentId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     typeGoal: {
-      type: String,
+      type: Number,
       required: [true, "Please add a name"],
     },
-    name: {
+    name: { 
       type: String,
       required: [true, "Please add a name"],
     },
     valueGoal: {
-      type: String,
+      type: Number,
       required: [true, "Please add a name"],
     },
 

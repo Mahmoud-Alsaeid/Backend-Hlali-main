@@ -15,6 +15,22 @@ const childSchema = mongoose.Schema(
       type: String,
       required: [false, "Please add a gender"],
     },
+    savingAccount: {
+      type: Number,
+      default:0
+    },
+    currentAccount: {
+      type: Number,
+      default:0
+    },
+    goal: [{ type: mongoose.Schema.Types.ObjectId, ref: "Goal" , populate: true}],
+    task: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" , populate: true}],
+    requestTask: [{ 
+      type: mongoose.Schema.Types.ObjectId,
+       ref: "RequestTask" , 
+       populate: true}],
+
+
   },
   {
     timestamps: true,

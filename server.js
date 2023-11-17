@@ -24,6 +24,8 @@ app.use("/api/child", require("./routes/childRoutes"));
 app.use("/api/task", require("./routes/taskRoutes"));
 app.use("/api/goal", require("./routes/goalRoutes"));
 app.use("/api/requesttask", require("./routes/requestTaskRoutes"));
+app.use("/api/transaction", require("./routes/TransactionRoutes"));
+
 
 app.use(errorHandler);
 

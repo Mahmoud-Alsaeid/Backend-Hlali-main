@@ -8,7 +8,7 @@ const sendemail = require("../Utils/sendMailer");
 // @route   GET /api/user
 // @access  Private
 const getUser = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().populate('requestTask').populate('Task');
   res.status(200).json(users);
 });
 
