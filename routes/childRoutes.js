@@ -10,8 +10,8 @@ const {
 } = require("../controllers/childController");
 const { protect } = require("../middleware/authMiddleware");
 
+router.route("/child/:id").get(protect,getChildById);
 router.route("/").get(getChild).post(protect, setChild);
 router.route("/:id").delete(protect, deleteChild).put(protect, updateChild).get(protect,loginChild)
-router.route("child/:id").get(protect,getChildById);
 
 module.exports = router;

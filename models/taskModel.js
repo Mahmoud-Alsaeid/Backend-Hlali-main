@@ -5,7 +5,7 @@ const taskSchema = mongoose.Schema(
     parentId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     typeTask: {
       type: Number,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a type"],
     },
     name: {
       type: String,
@@ -13,7 +13,6 @@ const taskSchema = mongoose.Schema(
     },
     desc: {
       type: String,
-      required: [true, "Please add a name"],
     },
     time: {
       type: String,

@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const sendemail = require("../Utils/sendMailer");
+const childModel = require("../models/childModel");
 
 // @desc    Get User
 // @route   GET /api/user
@@ -195,7 +196,12 @@ const newpass = asyncHandler(async (req, res) => {
 // @route   GET /api/users/me
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
-  res.status(200).json(req.user);
+  const id = req.user.id
+  
+  const user = req.user;
+  const children = await  childModel.find({parentId: id})
+  console.log({children});
+  res.status(200).json({...user, firstTime: children.length === 0});
 });
 
 // Generate JWT

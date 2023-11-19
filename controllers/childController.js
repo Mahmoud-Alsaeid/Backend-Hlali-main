@@ -14,7 +14,7 @@ const getChild = asyncHandler(async (req, res) => {
 
 
 const getChildById = asyncHandler(async (req,res)=> {
-  const child = await Child.findById(req.params.id).populate('goal').populate('task').populate('RequestTask')
+  const child = await Child.findById(req.params.id).populate('goal').populate('task').populate('requestTask')
   const parentId = child.parentId
   const brothers = await Child.find({parentId})
   res.status(200).json({

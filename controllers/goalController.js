@@ -28,7 +28,6 @@ const setGoal = asyncHandler(async (req, res) => {
   }
 
   const Goals = await Goal.create({
-    parentId: req.user.id,
     typeGoal,
     name,
     valueGoal,
@@ -100,14 +99,14 @@ const updatedGoalValue = asyncHandler(async (req, res) => {
 // @route   DELETE /api/Goal/:id
 // @access  Private
 const deleteGoal = asyncHandler(async (req, res) => {
-  const Goal = await Goal.findById(req.params.id);
+  const Goals = await Goal.findById(req.params.id);
 
-  if (!Goal) {
+  if (!Goals) {
     res.status(400);
     throw new Error("Goal not found");
   }
 
-  await Goal.findOneAndDelete(Goal._id);
+  await Goal.findOneAndDelete(Goals._id);
 
   res.status(200).json({ id: req.params.id });
 });
