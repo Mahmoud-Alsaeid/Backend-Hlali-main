@@ -18,7 +18,6 @@ const setTransaction = asyncHandler(async (req, res) => {
   const { sender, receiver, amount } = req.body;
   await Child.findOneAndUpdate(
     { _id: sender },
-
     { $inc: { currentAccount: -amount } }
   );
   await Child.findByIdAndUpdate(
@@ -35,17 +34,20 @@ const setTransaction = asyncHandler(async (req, res) => {
 });
 
 const internalTranaction = asyncHandler(async (req, res) => {
+  let internalTranaction 
   const id = req.params.id;
-  const { amount } = req.body;
-  const internalTranaction = await Child.findOneAndUpdate(
-    { _id: id },
-    { $inc: { currentAccount: -amount } },
-    { $inc: { savingAccount: amount } },
-    { new: true }
-  );
+  const { amount,from,to } = req.body;
+       internalTranaction = await Child.findByIdAndUpdate(
+      { _id: id },
+      {
+        $inc: {
+          currentAccount: from === "currentAccount" ? -amount : amount,
+          savingAccount: from === "currentAccount" ? amount : -amount,
+        },
+      },
+      { new: true })
   res.status(200).json(internalTranaction);
 });
-
 const fromFather = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const { amount } = req.body;
