@@ -11,9 +11,9 @@ const {
 } = require("../controllers/taskController");
 const { protect } = require("../middleware/authMiddleware");
 
-router.route("/").get(getAllTasks).post(protect, setTask);
+router.route("/").get(protect,getAllTasks).post(protect, setTask);
 router.route("/notCmopletaed/").get(getUnCompletedTask)
-router.route("/Cmopletaed/").get(getCompletedTask)
+router.route("/Cmopletaed/").get(protect,getCompletedTask)
 
 //router.route("/allTasks/:id").get(getCompletedTask)
 

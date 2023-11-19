@@ -5,7 +5,7 @@ const goalSchema = mongoose.Schema(
     parentId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     typeGoal: {
       type: Number,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a type"],
     },
     name: { 
       type: String,
@@ -13,7 +13,7 @@ const goalSchema = mongoose.Schema(
     },
     valueGoal: {
       type: Number,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a value"],
     },
 
     childId: { type: mongoose.Schema.Types.ObjectId, ref: "Child" },

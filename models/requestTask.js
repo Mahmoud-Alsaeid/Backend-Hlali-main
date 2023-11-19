@@ -16,7 +16,7 @@ const requestTaskSchema = mongoose.Schema(
       required: [true, "Please add a name"],
     },
 
-    finalTime: {
+    time: {
       type: String,
       required: [true, "Please add a name"],
     },

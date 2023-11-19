@@ -3,12 +3,18 @@ const Child = require("../models/childModel");
 const RequestTask = require("../models/requestTask");
 const User = require("../models/userModel");
 const { setTask } = require("../controllers/taskController");
-const Task = require("../models/taskModel")
+const Task = require("../models/taskModel");
+const childModel = require("../models/childModel");
 // @desc    Get Task
 // @route   GET /api/Task
 // @access  Private
 const getRequestTask = asyncHandler(async (req, res) => {
-  const RequestTasks = await RequestTask.find({ status: false });
+  const RequestTasks = await RequestTask.find({  }).populate({
+    path:'childId',
+    select: {
+      name: 1
+    }
+  });
   res.status(200).json(RequestTasks);
 });
 
@@ -16,23 +22,23 @@ const getRequestTask = asyncHandler(async (req, res) => {
 // @route   POST /api/class
 // @access  Private
 const setRequestTask = asyncHandler(async (req, res) => {
-  const { typeTask, name, valueTask, finalTime, childId,desc } = req.body;
+  const { typeTask, name, valueTask, time, childId,desc } = req.body;
   if (!name) {
     res.status(400);
     throw new Error("Please add a text field");
   }
+  const childObj =await  childModel.findById(childId);
   const RequestTasks = await RequestTask.create({
-    parentId: req.user.id,
     typeTask,
     name,
     desc,
     valueTask,
-    finalTime,
+    time,
     childId,
   });
   const child = await Child.findByIdAndUpdate(childId, 
     { $push: { requestTask: RequestTasks._id } },  );
-  const user = await User.findByIdAndUpdate(RequestTasks.parentId, 
+  const user = await User.findByIdAndUpdate(childObj.parentId, 
     { $push: { requestTask: RequestTasks._id } },  );
   res.status(200).json(RequestTasks);
 });
@@ -64,7 +70,7 @@ const updateRequestTask = asyncHandler(async (req, res) => {
 });
 const approveRequestTask = asyncHandler(async (req, res) => {
   const RequestTasks = await RequestTask.findById(req.params.id);
-  const {parentId, desc,typeTask, name, valueTask, finalTime, childId } = RequestTasks;
+  const {desc,typeTask, name, valueTask, time, childId } = RequestTasks;
 
   /*parentId: req.user.id,
   typeTask,
@@ -74,14 +80,15 @@ const approveRequestTask = asyncHandler(async (req, res) => {
   childId,
   valueTask*/
   console.log(RequestTasks)
+  const childOj = await childModel.findById(childId);
   const Tasks = await Task.create({
-    parentId: parentId,
     valueTask: valueTask,
     typeTask: typeTask,
     name: name,
     desc: desc,
-    time: finalTime,
+    time: time,
     childId: childId,
+    parentId: childOj.parentId
   });
   const child = await Child.findByIdAndUpdate(childId,
     { $push: { task: Tasks._id } }  ) 

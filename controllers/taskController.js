@@ -3,6 +3,7 @@ const Child = require("../models/childModel");
 const User = require("../models/userModel");
 
 const Task = require("../models/taskModel");
+const taskModel = require("../models/taskModel");
 
 // @desc    Get Task
 // @route   GET /api/Task
@@ -15,7 +16,13 @@ const getAllTasks = asyncHandler(async (req, res) => {
   res.status(200).json(Tasks);
 });
 const getCompletedTask = asyncHandler(async (req, res) => {
-  const Tasks = await Task.find({status:true});
+  const Tasks = await Task.find({status:true,parentId: req.user.id, }).populate({
+    path: 'childId',
+    
+    select: {
+      name: 1 
+    }
+  });
   res.status(200).json(Tasks);
 });
 
@@ -28,8 +35,8 @@ const getUnCompletedTask = asyncHandler(async (req, res) => {
 // @route   POST /api/class
 // @access  Private
 const setTask = asyncHandler(async (req, res) => {
-  const { parentId, typeTask, name, desc, time, childId,valueTask } = req.body;
-
+  const { typeTask, name, time, childId,valueTask,desc } = req.body;
+  
   // let user = await User.findById({req.user.id});
 
   // if (!user) {
@@ -40,14 +47,14 @@ const setTask = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please add a text field");
   }
+
   const Tasks = await Task.create({
     parentId: req.user.id,
     typeTask,
     name,
-    desc,
     time,
     childId,
-    valueTask
+    valueTask,desc
   });
   const child = await Child.findByIdAndUpdate(childId,
     { $push: { task: Tasks._id } }  ) 
@@ -61,7 +68,7 @@ const setTask = asyncHandler(async (req, res) => {
 // @access  Private
 const updateTask = asyncHandler(async (req, res) => {
   const Tasks = await Task.findById(req.params.id);
-
+  console.log({req: req.body});
   if (!Tasks) {
     res.status(400);
     throw new Error("Class not found");
@@ -96,14 +103,14 @@ const EndTask = asyncHandler(async (req, res) => {
 // @route   DELETE /api/Task/:id
 // @access  Private
 const deleteTask = asyncHandler(async (req, res) => {
-  const Task = await Task.findById(req.params.id);
+  const Task = await taskModel.findById(req.params.id);
 
   if (!Task) {
     res.status(400);
     throw new Error("Task not found");
   }
 
-  await Task.findOneAndDelete(Task._id);
+  await taskModel.findOneAndDelete(Task._id);
 
   res.status(200).json({ id: req.params.id });
 });
