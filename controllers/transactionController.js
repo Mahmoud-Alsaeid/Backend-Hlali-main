@@ -7,8 +7,8 @@ const Transaction = require("../models/transactionModel");
 // @route   GET /api/Goal
 // @access  Private
 const getTransaction = asyncHandler(async (req, res) => {
-  const Transaction = await Transaction.find();
-  res.status(200).json(Transaction);
+  const transaction = await Transaction.find();
+  res.status(200).json(transaction);
 });
 
 // @desc    Set Class

@@ -6,12 +6,16 @@ const {
   updateTask,
   deleteTask,
   getUnCompletedTask,
-  EndTask
+  EndTask,
+  getAllTasks
 } = require("../controllers/taskController");
 const { protect } = require("../middleware/authMiddleware");
 
-router.route("/").get(getCompletedTask).post(protect, setTask);
+router.route("/").get(getAllTasks).post(protect, setTask);
 router.route("/notCmopletaed/").get(getUnCompletedTask)
+router.route("/Cmopletaed/").get(getCompletedTask)
+
+//router.route("/allTasks/:id").get(getCompletedTask)
 
 router.route("/:id").delete(protect, deleteTask).put(protect, updateTask).get(protect,EndTask);
 

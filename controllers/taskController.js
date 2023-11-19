@@ -7,13 +7,20 @@ const Task = require("../models/taskModel");
 // @desc    Get Task
 // @route   GET /api/Task
 // @access  Private
+const getAllTasks = asyncHandler(async (req, res) => {
+  
+  const {id} = req.query
+  console.log(id)
+  const Tasks = await Task.find({childId:id});
+  res.status(200).json(Tasks);
+});
 const getCompletedTask = asyncHandler(async (req, res) => {
-  const Tasks = await Task.find({status:false});
+  const Tasks = await Task.find({status:true});
   res.status(200).json(Tasks);
 });
 
 const getUnCompletedTask = asyncHandler(async (req, res) => {
-  const Tasks = await Task.find({status:true});
+  const Tasks = await Task.find({status:false});
   res.status(200).json(Tasks);
 });
 
@@ -107,5 +114,6 @@ module.exports = {
   updateTask,
   deleteTask,
   getUnCompletedTask,
-  EndTask
+  EndTask,
+  getAllTasks
 };
