@@ -5,9 +5,18 @@ const User = require("../models/userModel");
 const Task = require("../models/taskModel");
 const taskModel = require("../models/taskModel");
 
-// @desc    Get Task
+// @desc    Get Task    parentId: req.user.id,
+
 // @route   GET /api/Task
 // @access  Private
+
+const getAllParentTasks = asyncHandler(async (req, res) => {
+  const parentId = req.user.id 
+  const Tasks = await Task.find({parentId:parentId});
+  res.status(200).json(Tasks);
+});
+
+
 const getAllTasks = asyncHandler(async (req, res) => {
   
   const {id} = req.query
@@ -122,5 +131,6 @@ module.exports = {
   deleteTask,
   getUnCompletedTask,
   EndTask,
-  getAllTasks
+  getAllTasks,
+  getAllParentTasks
 };

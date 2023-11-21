@@ -7,11 +7,14 @@ const {
   deleteTask,
   getUnCompletedTask,
   EndTask,
-  getAllTasks
+  getAllTasks,
+  getAllParentTasks
 } = require("../controllers/taskController");
 const { protect } = require("../middleware/authMiddleware");
 
 router.route("/").get(protect,getAllTasks).post(protect, setTask);
+router.route("/parentTasks/").get(protect,getAllParentTasks)
+
 router.route("/notCmopletaed/").get(getUnCompletedTask)
 router.route("/Cmopletaed/").get(protect,getCompletedTask)
 
