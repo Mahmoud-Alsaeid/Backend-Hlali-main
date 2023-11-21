@@ -12,7 +12,15 @@ const taskModel = require("../models/taskModel");
 
 const getAllParentTasks = asyncHandler(async (req, res) => {
   const parentId = req.user.id;
-  const Tasks = await Task.find({ parentId: parentId });
+  const Tasks = await Task.find({ parentId: parentId, status: false }).populate(
+    {
+      path: "childId",
+
+      select: {
+        name: 1,
+      },
+    }
+  );
   res.status(200).json(Tasks);
 });
 
@@ -26,13 +34,17 @@ const getCompletedTask = asyncHandler(async (req, res) => {
   const Tasks = await Task.find({
     status: true,
     parentId: req.user.id,
-  }).populate({
-    path: "childId",
+  })
+    .populate({
+      path: "childId",
 
-    select: {
-      name: 1,
-    },
-  });
+      select: {
+        name: 1,
+      },
+    })
+    .sort({ createdAt: -1 })
+    .limit(3);
+
   res.status(200).json(Tasks);
 });
 
