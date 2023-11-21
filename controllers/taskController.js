@@ -9,25 +9,27 @@ const taskModel = require("../models/taskModel");
 // @route   GET /api/Task
 // @access  Private
 const getAllTasks = asyncHandler(async (req, res) => {
-  
-  const {id} = req.query
-  console.log(id)
-  const Tasks = await Task.find({childId:id});
+  const { id } = req.query;
+  console.log(id);
+  const Tasks = await Task.find({ childId: id });
   res.status(200).json(Tasks);
 });
 const getCompletedTask = asyncHandler(async (req, res) => {
-  const Tasks = await Task.find({status:true,parentId: req.user.id, }).populate({
-    path: 'childId',
-    
+  const Tasks = await Task.find({
+    status: true,
+    parentId: req.user.id,
+  }).populate({
+    path: "childId",
+
     select: {
-      name: 1 
-    }
+      name: 1,
+    },
   });
   res.status(200).json(Tasks);
 });
 
 const getUnCompletedTask = asyncHandler(async (req, res) => {
-  const Tasks = await Task.find({status:false});
+  const Tasks = await Task.find({ childId: req.query.childId, status: false });
   res.status(200).json(Tasks);
 });
 
@@ -35,8 +37,8 @@ const getUnCompletedTask = asyncHandler(async (req, res) => {
 // @route   POST /api/class
 // @access  Private
 const setTask = asyncHandler(async (req, res) => {
-  const { typeTask, name, time, childId,valueTask,desc } = req.body;
-  
+  const { typeTask, name, time, childId, valueTask, desc } = req.body;
+
   // let user = await User.findById({req.user.id});
 
   // if (!user) {
@@ -54,12 +56,15 @@ const setTask = asyncHandler(async (req, res) => {
     name,
     time,
     childId,
-    valueTask,desc
+    valueTask,
+    desc,
   });
-  const child = await Child.findByIdAndUpdate(childId,
-    { $push: { task: Tasks._id } }  ) 
-  const user = await User.findByIdAndUpdate(Tasks.parentId, 
-    { $push: { task: Tasks._id } },  );
+  const child = await Child.findByIdAndUpdate(childId, {
+    $push: { task: Tasks._id },
+  });
+  const user = await User.findByIdAndUpdate(Tasks.parentId, {
+    $push: { task: Tasks._id },
+  });
   res.status(200).json(Tasks);
 });
 
@@ -68,7 +73,7 @@ const setTask = asyncHandler(async (req, res) => {
 // @access  Private
 const updateTask = asyncHandler(async (req, res) => {
   const Tasks = await Task.findById(req.params.id);
-  console.log({req: req.body});
+  console.log({ req: req.body });
   if (!Tasks) {
     res.status(400);
     throw new Error("Class not found");
@@ -88,13 +93,16 @@ const EndTask = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Class not found");
   }
-  const child = await Child.findByIdAndUpdate(Tasks.childId,
-    {$inc : {currentAccount : Tasks.valueTask }}
-  )
-  const updatedTask = await Task.findByIdAndUpdate(req.params.id,
-     {status:true}, {
-    new: true,
+  const child = await Child.findByIdAndUpdate(Tasks.childId, {
+    $inc: { currentAccount: Tasks.valueTask },
   });
+  const updatedTask = await Task.findByIdAndUpdate(
+    req.params.id,
+    { status: true },
+    {
+      new: true,
+    }
+  );
 
   res.status(200).json(updatedTask);
 });
@@ -122,5 +130,5 @@ module.exports = {
   deleteTask,
   getUnCompletedTask,
   EndTask,
-  getAllTasks
+  getAllTasks,
 };
