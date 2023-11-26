@@ -16,17 +16,29 @@ const getGoal = asyncHandler(async (req, res) => {
 // @route   POST /api/class
 // @access  Private
 const setGoal = asyncHandler(async (req, res) => {
-  const { typeGoal, name, valueGoal, childId } = req.body;
+  try {
+    const { typeGoal, name, valueGoal, childId } = req.body;
 
-  // let user = await User.findById({req.user.id});
+    if (!name || !valueGoal || !childId) {
+      res.status(400);
+      throw new Error("Please provide all required fields");
+    }
 
-  // if (!user) {
-  //   res.status(400);
-  //   throw new Error("Please add a user field");
-  // }
-  if (!name) {
-    res.status(400);
-    throw new Error("Please add a text field");
+    const Goals = await Goal.create({
+      typeGoal,
+      name,
+      valueGoal,
+      childId,
+    });
+
+    const child = await Child.findByIdAndUpdate(childId, {
+      $push: { goal: Goals._id },
+    });
+
+    res.status(200).json(Goals);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ error: error.message });
   }
 
   const Goals = await Goal.create({
@@ -45,72 +57,102 @@ const setGoal = asyncHandler(async (req, res) => {
 // @route   PUT /api/Goal/:id
 // @access  Private
 const updateGoal = asyncHandler(async (req, res) => {
-  const Goals = await Goal.findById(req.params.id);
+  try {
+    const Goals = await Goal.findById(req.params.id);
 
-  if (!Goals) {
-    res.status(400);
-    throw new Error("Class not found");
+    if (!Goals) {
+      res.status(404);
+      throw new Error("Goal not found");
+    }
+
+    // Add validation checks for the fields you want to validate
+    // For example, check if the updated data is valid before applying
+
+    const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+
+    res.status(200).json(updatedGoal);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ error: error.message });
   }
-
-  const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-
-  res.status(200).json(updatedGoal);
 });
 
-const internalTranaction = asyncHandler(async (req, res) => {
-  const id = req.params.id;
-  const { amount } = req.body;
-  const internalTranaction = await Child.findOneAndUpdate(
-    { _id: id },
-    { $inc: { currentAccount: -amount } },
-    { $inc: { savingAccount: amount } },
-    { new: true }
-  );
-  res.status(200).json(internalTranaction);
+const internalTransaction = asyncHandler(async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { amount } = req.body;
+
+    if (!amount) {
+      res.status(400);
+      throw new Error("Please provide the 'amount' field");
+    }
+
+    const internalTransaction = await Child.findOneAndUpdate(
+      { _id: id },
+      { $inc: { currentAccount: -amount, savingAccount: amount } },
+      { new: true }
+    );
+
+    res.status(200).json(internalTransaction);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ error: error.message });
+  }
 });
 
 const updatedGoalValue = asyncHandler(async (req, res) => {
-  const { amount, accountType } = req.body;
-  const goal = await Goal.findById(req.params.id);
-  await Goal.findOneAndUpdate(
-    { _id: req.params.id },
-    { $inc: { valueGoal: -amount } }
-  );
-  if (accountType == "currentAccount") {
-    const internalTranaction = await Child.findOneAndUpdate(
-      { _id: goal.childId },
-      { $inc: { currentAccount: -amount } },
-      { new: true }
-    );
-  } else {
-    const internalTranaction = await Child.findOneAndUpdate(
-      { _id: goal.childId },
-      { $inc: { savingAccount: -amount } },
-      { new: true }
-    );
-  }
+  try {
+    const { amount, accountType } = req.body;
 
-  res.status(200).json({
-    internalTranaction,
-  });
+    if (!amount || !accountType) {
+      res.status(400);
+      throw new Error("Please provide 'amount' and 'accountType' fields");
+    }
+
+    const goal = await Goal.findById(req.params.id);
+
+    await Goal.findOneAndUpdate(
+      { _id: req.params.id },
+      { $inc: { valueGoal: -amount } }
+    );
+
+    const fieldToUpdate =
+      accountType === "currentAccount" ? "currentAccount" : "savingAccount";
+
+    const internalTransaction = await Child.findOneAndUpdate(
+      { _id: goal.childId },
+      { $inc: { [fieldToUpdate]: -amount } },
+      { new: true }
+    );
+
+    res.status(200).json({ internalTransaction });
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ error: error.message });
+  }
 });
 
 // @desc    Delete ypeClass
 // @route   DELETE /api/Goal/:id
 // @access  Private
 const deleteGoal = asyncHandler(async (req, res) => {
-  const Goals = await Goal.findById(req.params.id);
+  try {
+    const Goals = await Goal.findById(req.params.id);
 
-  if (!Goals) {
-    res.status(400);
-    throw new Error("Goal not found");
+    if (!Goals) {
+      res.status(404);
+      throw new Error("Goal not found");
+    }
+
+    await Goal.findOneAndDelete(Goals._id);
+
+    res.status(200).json({ id: req.params.id });
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({ error: error.message });
   }
-
-  await Goal.findOneAndDelete(Goals._id);
-
-  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
