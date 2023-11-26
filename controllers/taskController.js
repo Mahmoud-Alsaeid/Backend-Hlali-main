@@ -18,6 +18,7 @@ const getAllParentTasks = asyncHandler(async (req, res) => {
 
       select: {
         name: 1,
+        gender: 1,
       },
     }
   );
@@ -40,6 +41,7 @@ const getCompletedTask = asyncHandler(async (req, res) => {
 
       select: {
         name: 1,
+        gender: 1,
       },
     })
     .sort({ createdAt: -1 })

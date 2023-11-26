@@ -20,10 +20,6 @@ router.route("/Cmopletaed/").get(protect, getCompletedTask);
 
 //router.route("/allTasks/:id").get(getCompletedTask)
 
-router
-  .route("/:id")
-  .delete(protect, deleteTask)
-  .put(protect, updateTask)
-  .get(EndTask);
+router.route("/:id").delete(protect, deleteTask).put(updateTask).get(EndTask);
 
 module.exports = router;

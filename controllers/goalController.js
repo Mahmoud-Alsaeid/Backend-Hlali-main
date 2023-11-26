@@ -6,7 +6,9 @@ const Goal = require("../models/goalModel");
 // @route   GET /api/Goal
 // @access  Private
 const getGoal = asyncHandler(async (req, res) => {
-  const Goals = await Goal.find();
+  const { id } = req.query;
+  console.log(id);
+  const Goals = await Goal.find({ childId: id });
   res.status(200).json(Goals);
 });
 
@@ -34,7 +36,7 @@ const setGoal = asyncHandler(async (req, res) => {
     childId,
   });
   const child = await Child.findByIdAndUpdate(childId, {
-    $push: { goal: Goals._id }
+    $push: { goal: Goals._id },
   });
   res.status(200).json(Goals);
 });
