@@ -10,10 +10,11 @@ const Task = require("../models/taskModel");
 const getRequestTask = asyncHandler(async (req, res) => {
   try {
     const RequestTasks = await RequestTask.find({}).populate({
-      path: 'childId',
+      path: "childId",
       select: {
-        name: 1
-      }
+        name: 1,
+        gender: 1,
+      },
     });
     res.status(200).json(RequestTasks);
   } catch (error) {
@@ -44,8 +45,12 @@ const setRequestTask = asyncHandler(async (req, res) => {
       childId,
     });
 
-    const child = await Child.findByIdAndUpdate(childId, { $push: { requestTask: RequestTasks._id } });
-    const user = await User.findByIdAndUpdate(childObj.parentId, { $push: { requestTask: RequestTasks._id } });
+    const child = await Child.findByIdAndUpdate(childId, {
+      $push: { requestTask: RequestTasks._id },
+    });
+    const user = await User.findByIdAndUpdate(childObj.parentId, {
+      $push: { requestTask: RequestTasks._id },
+    });
 
     res.status(200).json(RequestTasks);
   } catch (error) {
@@ -98,11 +103,15 @@ const approveRequestTask = asyncHandler(async (req, res) => {
       desc,
       time,
       childId,
-      parentId: childOj.parentId
+      parentId: childOj.parentId,
     });
 
-    const child = await Child.findByIdAndUpdate(childId, { $push: { task: Tasks._id } });
-    const user = await User.findByIdAndUpdate(Tasks.parentId, { $push: { task: Tasks._id } });
+    const child = await Child.findByIdAndUpdate(childId, {
+      $push: { task: Tasks._id },
+    });
+    const user = await User.findByIdAndUpdate(Tasks.parentId, {
+      $push: { task: Tasks._id },
+    });
 
     await RequestTask.findByIdAndDelete(req.params.id);
 
@@ -139,5 +148,5 @@ module.exports = {
   setRequestTask,
   updateRequestTask,
   deleteRequestTask,
-  approveRequestTask
+  approveRequestTask,
 };

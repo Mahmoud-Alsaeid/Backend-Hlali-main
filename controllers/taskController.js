@@ -16,6 +16,7 @@ const getAllParentTasks = asyncHandler(async (req, res) => {
 
       select: {
         name: 1,
+        gender: 1,
       },
     });
     res.status(200).json(Tasks);
