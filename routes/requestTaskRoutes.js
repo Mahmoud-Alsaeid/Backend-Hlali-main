@@ -9,7 +9,7 @@ const {
 } = require("../controllers/requestTaskController");
 const { protect } = require("../middleware/authMiddleware");
 
-router.route("/").get(getRequestTask).post(setRequestTask);
+router.route("/").get(protect, getRequestTask).post(setRequestTask);
 router
   .route("/:id")
   .delete( deleteRequestTask)

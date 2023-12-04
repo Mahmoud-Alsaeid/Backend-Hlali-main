@@ -9,7 +9,9 @@ const Task = require("../models/taskModel");
 // @access  Private
 const getRequestTask = asyncHandler(async (req, res) => {
   try {
-    const RequestTasks = await RequestTask.find({}).populate({
+    const RequestTasks = await RequestTask.find({
+      parentId: req.user.id
+    }).populate({
       path: "childId",
       select: {
         name: 1,
