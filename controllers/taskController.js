@@ -147,9 +147,9 @@ const EndTask = asyncHandler(async (req, res) => {
       throw new Error("Task not found");
     }
 
-    const child = await Child.findByIdAndUpdate(Tasks.childId, {
+    /* const child = await Child.findByIdAndUpdate(Tasks.childId, {
       $inc: { currentAccount: Tasks.valueTask },
-    });
+    }); */
 
     const updatedTask = await Task.findByIdAndUpdate(
       req.params.id,
@@ -163,6 +163,15 @@ const EndTask = asyncHandler(async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+const FinishTask = asyncHandler(async (req, res) => {
+    const child = await Child.findByIdAndUpdate(Tasks.childId, {
+      $inc: { currentAccount: Tasks.valueTask },
+    }); 
+
+    await Task.findByIdAndDelete(
+      req.params.id
+    );
+})
 
 const deleteTask = asyncHandler(async (req, res) => {
   try {
@@ -191,4 +200,5 @@ module.exports = {
   EndTask,
   getAllTasks,
   getAllParentTasks,
+  FinishTask
 };

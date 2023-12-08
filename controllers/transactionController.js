@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Child = require("../models/childModel");
 const Goal = require("../models/goalModel");
 const Transaction = require("../models/transactionModel");
-
+const cron = require('node-cron');
 // @desc    Get Goal
 // @route   GET /api/Goal
 // @access  Private
@@ -81,32 +81,68 @@ const internalTransaction = asyncHandler(async (req, res) => {
   }
 });
 
+ const cache = {};
+
+
+const scheduleTransaction = async (fatherId, childId, day, amount) => {
+  try {
+    console.log({fatherId, childId, day, amount});
+    const existingJob = cache?.[`${fatherId}_${childId}`];
+    if (existingJob) {
+      existingJob.stop();
+    }
+
+    const newJob = cron.schedule(`0 0 ${day} * *`, async () => {
+      try {
+        const internalTransaction = await Child.findOneAndUpdate(
+          { _id: childId },
+          { $inc: { currentAccount: amount } },
+          { new: true }
+        );
+
+        console.log(`Transaction for day ${day}:`, internalTransaction);
+      } catch (error) {
+        console.error(error.message);
+      }
+    });
+
+    // Save the new scheduled job to the object for later reference
+    cache[`${fatherId}_${childId}`] = newJob;
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+
 const fromFather = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
-    const { amount } = req.body;
-
-    if (!amount) {
+    const { amount, day } = req.body;
+    const parentId = req.user.id;
+    if (!amount || !day) {
       res.status(400);
-      throw new Error("Please provide the 'amount' field");
+      throw new Error("Please provide both 'amount' and 'day' fields");
     }
 
-    const internalTransaction = await Child.findOneAndUpdate(
-      { _id: id },
-      { $inc: { currentAccount: amount } },
-      { new: true }
-    );
+    if (day < 1 || day > 27) {
+      res.status(400);
+      throw new Error("Invalid day. Day should be between 1 and 27.");
+    }
 
-    res.status(200).json(internalTransaction);
+    await scheduleTransaction(parentId, id, day, amount);
+
+    res.status(200).json({ message: `Transaction scheduled for day ${day}` });
   } catch (error) {
     console.error(error.message);
     res.status(400).json({ error: error.message });
   }
 });
 
+
 module.exports = {
   getTransaction,
   setTransaction,
   internalTransaction,
   fromFather,
+  cache
 };

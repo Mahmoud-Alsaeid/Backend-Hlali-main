@@ -9,6 +9,7 @@ const {
   EndTask,
   getAllTasks,
   getAllParentTasks,
+  FinishTask,
 } = require("../controllers/taskController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -19,7 +20,7 @@ router.route("/notCmopletaed/").get(getUnCompletedTask);
 router.route("/Cmopletaed/").get(protect, getCompletedTask);
 
 //router.route("/allTasks/:id").get(getCompletedTask)
-
+router.route('/father-complete/:id').get(FinishTask)
 router.route("/:id").delete(protect, deleteTask).put(updateTask).get(EndTask);
 
 module.exports = router;

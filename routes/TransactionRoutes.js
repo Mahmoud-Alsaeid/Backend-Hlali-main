@@ -9,7 +9,7 @@ const {
 const { protect } = require("../middleware/authMiddleware");
 
 router.route("/").get(getTransaction).post(setTransaction);
-router.route("/fromFather/:id").post(fromFather);
+router.route("/fromFather/:id").post(protect, fromFather);
 router.route("/:id").post(internalTransaction);
 
 module.exports = router;
