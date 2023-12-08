@@ -164,6 +164,7 @@ const EndTask = asyncHandler(async (req, res) => {
   }
 });
 const FinishTask = asyncHandler(async (req, res) => {
+  const Tasks = await Task.findById(req.params.id);
     const child = await Child.findByIdAndUpdate(Tasks.childId, {
       $inc: { currentAccount: Tasks.valueTask },
     }); 
