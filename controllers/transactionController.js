@@ -3,6 +3,7 @@ const Child = require("../models/childModel");
 const Goal = require("../models/goalModel");
 const Transaction = require("../models/transactionModel");
 const cron = require('node-cron');
+const {createNotification } = require('./requestTaskController');
 // @desc    Get Goal
 // @route   GET /api/Goal
 // @access  Private
@@ -37,7 +38,12 @@ const setTransaction = asyncHandler(async (req, res) => {
       { _id: receiver },
       { $inc: { currentAccount: amount } }
     );
-
+      const ss = await Child.findById(sender)
+    await createNotification({
+      title: 'اخوتي',
+      body: `حوالة واردة من ${ss.name}`,
+      user: receiver
+    });
     const transaction = await Transaction.create({
       sender,
       receiver,

@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 
 const Task = require("../models/taskModel");
 const taskModel = require("../models/taskModel");
-
+const {createNotification} = require('./requestTaskController')
 const getAllParentTasks = asyncHandler(async (req, res) => {
   try {
     const parentId = req.user.id;
@@ -156,6 +156,12 @@ const EndTask = asyncHandler(async (req, res) => {
       { status: true },
       { new: true }
     );
+    const word = childObj.gender === 'male' ? 'انجز' : 'انجزت'
+    await createNotification({
+      title: 'مهام طفلي',
+      body: `${word} ${childObj.name} مهمة ${Tasks.name} بنجاح`,
+      user: parentId
+    });
 
     res.status(200).json(updatedTask);
   } catch (error) {

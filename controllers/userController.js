@@ -98,55 +98,6 @@ const loginUser = asyncHandler(async (req, res) => {
 // @desc    Update user
 // @route   PUT /api/user/:id
 // @access  Private
-const updateUser = asyncHandler(async (req, res) => {
-  try {
-    const { name, email, phone, bio, isAdmin, active, code } = req.body;
-
-    const user = await User.findById(req.params.id);
-
-    if (!user) {
-      res.status(400);
-      throw new Error("user not found");
-    }
-
-    // Check for user
-    if (!req.user) {
-      res.status(401);
-      throw new Error("User not found");
-    }
-
-    // Make sure the logged in user matches the member user
-    // if (user.toString() !== req.user.id) {
-    //   res.status(401);
-    //   throw new Error("User not authorized");
-    // }
-
-    const fileName = req.file.originalname;
-    const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
-
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        name,
-        email,
-        phone,
-        bio,
-        isAdmin,
-        active,
-        code,
-        image: `${basePath}${fileName}`,
-      },
-      {
-        new: true,
-      }
-    );
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    console.error(error.message);
-    res.status(400).json({ error: error.message });
-  }
-});
 
 // @desc    Delete User
 // @route   DELETE /api/user/:id
@@ -218,7 +169,7 @@ const newpass = asyncHandler(async (req, res) => {
     if (!user) {
       return res.status(404).send("not email1");
     }
-    if (password < 7) {
+    if (password.length < 7) {
       return res.status(404).send("not password");
     }
 
@@ -261,7 +212,6 @@ module.exports = {
   getUser,
   registerUser,
   loginUser,
-  updateUser,
   deleteUser,
   getMe,
   sendcode,

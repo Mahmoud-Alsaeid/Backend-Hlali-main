@@ -4,7 +4,6 @@ const {
   getUser,
   registerUser,
   loginUser,
-  updateUser,
   deleteUser,
   getMe,
   sendcode,
@@ -16,7 +15,6 @@ const { handleMultipartData } = require("../Utils/Uploader");
 router.get("/", getUser);
 router.post("/", handleMultipartData, registerUser);
 router.post("/login", loginUser);
-router.put("/:id", handleMultipartData, protect, updateUser);
 router.delete("/:id", protect, deleteUser);
 router.post("/sendcode", sendcode);
 router.post("/newpass", newpass);

@@ -58,3 +58,4 @@ describe('fromFather', () => {
     expect(res.json).toHaveBeenCalledWith({ message: `Transaction scheduled for day ${day}` });
   });
 });
+

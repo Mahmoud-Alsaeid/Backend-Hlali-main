@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const { User } = require("../models/userModel");
+const User  = require("../models/userModel");
 const Random = require("crypto-random");
 
 //
@@ -15,7 +15,7 @@ module.exports = async (email) => {
   });
 
   const sendEmail = await transporter.sendMail({
-    from: process.env.EMAIL,
+    from:  "keetup.agency@gmail.com",
     to: email,
     subject: "forget password",
     text: " your code ",

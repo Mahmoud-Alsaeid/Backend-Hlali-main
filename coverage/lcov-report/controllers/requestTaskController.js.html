@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for controllers/transactionController.js</title>
+    <title>Code coverage report for controllers/requestTaskController.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">controllers</a> transactionController.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">controllers</a> requestTaskController.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.64% </span>
+                <span class="strong">25.37% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>48/67</span>
+                <span class='fraction'>17/67</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/24</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.64% </span>
+                <span class="strong">25.37% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>48/67</span>
+                <span class='fraction'>17/67</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -217,53 +217,56 @@
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,23 +274,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -296,6 +300,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,65 +320,93 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -373,157 +415,178 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const asyncHandler = require("express-async-handler");
 const Child = require("../models/childModel");
-const Goal = require("../models/goalModel");
-const Transaction = require("../models/transactionModel");
-const cron = require('node-cron');
-const {createNotification } = require('./requestTaskController');
-// @desc    Get Goal
-// @route   GET /api/Goal
+const RequestTask = require("../models/requestTask");
+const User = require("../models/userModel");
+const Task = require("../models/taskModel");
+const Noti = require('../models/notificaitonModel');
+&nbsp;
+&nbsp;
+const createNotification =<span class="fstat-no" title="function not covered" >as</span>ync ({
+  title, body, user
+}) =&gt; {
+<span class="cstat-no" title="statement not covered" >  await Noti.create({</span>
+    title, body, user
+  })
+};
+const deleteNotification =<span class="fstat-no" title="function not covered" >as</span>ync (id) =&gt; {
+<span class="cstat-no" title="statement not covered" >  await Noti.findByIdAndDelete(id)</span>
+};
+&nbsp;
+&nbsp;
+// @desc    Get Task
+// @route   GET /api/Task
 // @access  Private
-const getTransaction = asyncHandler(async (req, res) =&gt; {
+const getRequestTask = asyncHandler(async (req, res) =&gt; {
   try {
-    const transaction = await Transaction.find();
-    res.status(200).json(transaction);
+    const RequestTasks = await RequestTask.find({
+      parentId: req.user.id
+    }).populate({
+      path: "childId",
+      select: {
+        name: 1,
+        gender: 1,
+      },
+    });
+    res.status(200).json(RequestTasks);
   } catch (error) {
-    console.error(error.message);
-    res.status(400).json({ error: error.message });
+<span class="cstat-no" title="statement not covered" >    console.error(error.message);</span>
+<span class="cstat-no" title="statement not covered" >    res.status(400).json({ error: error.message });</span>
   }
 });
 &nbsp;
 // @desc    Set Class
 // @route   POST /api/class
 // @access  Private
-const setTransaction = asyncHandler(async (req, res) =&gt; {
-  try {
-    const { sender, receiver, amount } = req.body;
-&nbsp;
-    if (!sender || !receiver || !amount) {
-      res.status(400);
-      throw new Error("Please provide all required fields");
-    }
-&nbsp;
-    await Child.findOneAndUpdate(
-      { _id: sender },
-      { $inc: { currentAccount: -amount } }
-    );
-&nbsp;
-    await Child.findByIdAndUpdate(
-      { _id: receiver },
-      { $inc: { currentAccount: amount } }
-    );
-      const ss = await Child.findById(sender)
-    await createNotification({
-      title: 'اخوتي',
-      body: `حوالة واردة من ${ss.name}`,
-      user: receiver
-    });
-    const transaction = await Transaction.create({
-      sender,
-      receiver,
-      amount,
-    });
-&nbsp;
-    res.status(200).json(transaction);
-  } catch (error) {
-    console.error(error.message);
-    res.status(400).json({ error: error.message });
-  }
-});
-&nbsp;
-const internalTransaction = asyncHandler(<span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+const setRequestTask = asyncHandler(<span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
-    const id = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
-    const { amount, from, to } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+    const { typeTask, name, valueTask, time, childId, desc } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!amount || !from || !to) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!name || !desc || !valueTask || !time || !childId) {</span>
 <span class="cstat-no" title="statement not covered" >      res.status(400);</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error("Please provide all required fields");</span>
     }
+    
+    const childObj = <span class="cstat-no" title="statement not covered" >await Child.findById(childId);</span>
+    const RequestTasks = <span class="cstat-no" title="statement not covered" >await RequestTask.create({</span>
+      typeTask,
+      name,
+      desc,
+      valueTask,
+      time,
+      childId,
+    });
+    const word = <span class="cstat-no" title="statement not covered" >childObj.gender === 'male' ? 'قام' : 'قامت'</span>
+<span class="cstat-no" title="statement not covered" >    await createNotification({</span>
+      title: 'مهام طفلي',
+      body: `${word} ${childObj.name} بطلب مهمة جديدة`,
+      user: parentId
+    });
+    const child = <span class="cstat-no" title="statement not covered" >await Child.findByIdAndUpdate(childId, {</span>
+      $push: { requestTask: RequestTasks._id },
+    });
+    const user = <span class="cstat-no" title="statement not covered" >await User.findByIdAndUpdate(childObj.parentId, {</span>
+      $push: { requestTask: RequestTasks._id },
+    });
 &nbsp;
-    let internalTransaction;
+<span class="cstat-no" title="statement not covered" >    res.status(200).json(RequestTasks);</span>
+  } catch (error) {
+<span class="cstat-no" title="statement not covered" >    console.error(error.message);</span>
+<span class="cstat-no" title="statement not covered" >    res.status(400).json({ error: error.message });</span>
+  }
+});
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    internalTransaction = await Child.findByIdAndUpdate(</span>
-      { _id: id },
-      {
-        $inc: {
-          currentAccount: from === "currentAccount" ? -amount : amount,
-          savingAccount: from === "currentAccount" ? amount : -amount,
-        },
-      },
+// @desc    Update RequestTask
+// @route   PUT /api/RequestTask/:id
+// @access  Private
+const updateRequestTask = asyncHandler(<span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const RequestTasks = <span class="cstat-no" title="statement not covered" >await RequestTask.findById(req.params.id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!RequestTasks) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(404);</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error("RequestTask not found");</span>
+    }
+&nbsp;
+    const updatedRequestTask = <span class="cstat-no" title="statement not covered" >await RequestTask.findByIdAndUpdate(</span>
+      req.params.id,
+      req.body,
       { new: true }
     );
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    res.status(200).json(internalTransaction);</span>
+<span class="cstat-no" title="statement not covered" >    res.status(200).json(updatedRequestTask);</span>
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.error(error.message);</span>
 <span class="cstat-no" title="statement not covered" >    res.status(400).json({ error: error.message });</span>
   }
 });
 &nbsp;
- const cache = {};
+const approveRequestTask = asyncHandler(<span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const RequestTasks = <span class="cstat-no" title="statement not covered" >await RequestTask.findById(req.params.id);</span>
 &nbsp;
-&nbsp;
-const scheduleTransaction = async (fatherId, childId, day, amount) =&gt; {
-  try {
-    console.log({fatherId, childId, day, amount});
-    const existingJob = cache?.[`${fatherId}_${childId}`];
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (existingJob) {
-<span class="cstat-no" title="statement not covered" >      existingJob.stop();</span>
+<span class="cstat-no" title="statement not covered" >    if (!RequestTasks) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(404);</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error("RequestTask not found");</span>
     }
 &nbsp;
-    const newJob = cron.schedule(`0 0 ${day} * *`, async () =&gt; {
-      try {
-        const internalTransaction = await Child.findOneAndUpdate(
-          { _id: childId },
-          { $inc: { currentAccount: amount } },
-          { new: true }
-        );
+    const { desc, typeTask, name, valueTask, time, childId } = <span class="cstat-no" title="statement not covered" >RequestTasks;</span>
+    const childOj = <span class="cstat-no" title="statement not covered" >await Child.findById(childId);</span>
 &nbsp;
-        console.log(`Transaction for day ${day}:`, internalTransaction);
-      } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error(error.message);</span>
-      }
+    const Tasks = <span class="cstat-no" title="statement not covered" >await Task.create({</span>
+      valueTask,
+      typeTask,
+      name,
+      desc,
+      time,
+      childId,
+      parentId: childOj.parentId,
     });
 &nbsp;
-    // Save the new scheduled job to the object for later reference
-    cache[`${fatherId}_${childId}`] = newJob;
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    console.error(error.message);</span>
-  }
-};
+    const child = <span class="cstat-no" title="statement not covered" >await Child.findByIdAndUpdate(childId, {</span>
+      $push: { task: Tasks._id },
+    });
+    const user = <span class="cstat-no" title="statement not covered" >await User.findByIdAndUpdate(Tasks.parentId, {</span>
+      $push: { task: Tasks._id },
+    });
 &nbsp;
+<span class="cstat-no" title="statement not covered" >    await RequestTask.findByIdAndDelete(req.params.id);</span>
 &nbsp;
-const fromFather = asyncHandler(async (req, res) =&gt; {
-  try {
-    const id = req.params.id;
-    const { amount, day } = req.body;
-    const parentId = req.user.id;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!amount || !day) {
-<span class="cstat-no" title="statement not covered" >      res.status(400);</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error("Please provide both 'amount' and 'day' fields");</span>
-    }
-&nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (day &lt; 1 || day &gt; 27) {
-<span class="cstat-no" title="statement not covered" >      res.status(400);</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error("Invalid day. Day should be between 1 and 27.");</span>
-    }
-&nbsp;
-    await scheduleTransaction(parentId, id, day, amount);
-&nbsp;
-    res.status(200).json({ message: `Transaction scheduled for day ${day}` });
+<span class="cstat-no" title="statement not covered" >    res.status(200).json(req.body);</span>
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.error(error.message);</span>
 <span class="cstat-no" title="statement not covered" >    res.status(400).json({ error: error.message });</span>
   }
 });
 &nbsp;
+// @desc    Delete ypeClass
+// @route   DELETE /api/RequestTask/:id
+// @access  Private
+const deleteRequestTask = asyncHandler(<span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const RequestTasks = <span class="cstat-no" title="statement not covered" >await RequestTask.findById(req.params.id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!RequestTasks) {</span>
+<span class="cstat-no" title="statement not covered" >      res.status(404);</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error("RequestTask not found");</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    await RequestTask.findOneAndDelete(RequestTasks._id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    res.status(200).json({ id: req.params.id });</span>
+  } catch (error) {
+<span class="cstat-no" title="statement not covered" >    console.error(error.message);</span>
+<span class="cstat-no" title="statement not covered" >    res.status(400).json({ error: error.message });</span>
+  }
+});
 &nbsp;
 module.exports = {
-  getTransaction,
-  setTransaction,
-  internalTransaction,
-  fromFather,
-  cache
+  getRequestTask,
+  setRequestTask,
+  updateRequestTask,
+  deleteRequestTask,
+  approveRequestTask,
+  deleteNotification,
+  createNotification
 };
 &nbsp;</pre></td></tr></table></pre>
 

@@ -3,6 +3,26 @@ const Child = require("../models/childModel");
 const RequestTask = require("../models/requestTask");
 const User = require("../models/userModel");
 const Task = require("../models/taskModel");
+const Noti = require('../models/notificaitonModel');
+
+
+const createNotification =async ({
+  title, body, user
+}) => {
+  await Noti.create({
+    title, body, user
+  })
+};
+const deleteNotification =asyncHandler(async (req, res) => {
+  await Noti.findByIdAndDelete(req.params.id)
+});
+const getNotifications =asyncHandler(async (req, res) => {
+  const notifications = await Noti.find({
+    user: req.query.id
+  })
+  res.json(notifications)
+});
+
 
 // @desc    Get Task
 // @route   GET /api/Task
@@ -36,7 +56,7 @@ const setRequestTask = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Please provide all required fields");
     }
-
+    
     const childObj = await Child.findById(childId);
     const RequestTasks = await RequestTask.create({
       typeTask,
@@ -46,7 +66,13 @@ const setRequestTask = asyncHandler(async (req, res) => {
       time,
       childId,
     });
-
+    console.log({childObj})
+    const word = childObj.gender === 'male' ? 'قام' : 'قامت'
+    await createNotification({
+      title: 'مهام طفلي',
+      body: `${word} ${childObj.name} بطلب مهمة جديدة`,
+      user: childObj.parentId
+    });
     const child = await Child.findByIdAndUpdate(childId, {
       $push: { requestTask: RequestTasks._id },
     });
@@ -151,4 +177,7 @@ module.exports = {
   updateRequestTask,
   deleteRequestTask,
   approveRequestTask,
+  deleteNotification,
+  createNotification,
+  getNotifications
 };

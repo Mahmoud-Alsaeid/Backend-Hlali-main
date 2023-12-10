@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for models/childModel.js</title>
+    <title>Code coverage report for models/taskModel.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">models</a> childModel.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">models</a> taskModel.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -145,44 +145,44 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const mongoose = require("mongoose");
 &nbsp;
-const childSchema = mongoose.Schema(
+const taskSchema = mongoose.Schema(
   {
     parentId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    typeTask: {
+      type: Number,
+      required: [true, "Please add a type"],
+    },
     name: {
       type: String,
       required: [true, "Please add a name"],
     },
-    dateBirth: {
+    desc: {
+      type: String,
+    },
+    time: {
       type: String,
       required: [true, "Please add a name"],
     },
-    gender: {
-      type: String,
-      required: [false, "Please add a gender"],
+    valueTask : {
+      type : Number,
     },
-    savingAccount: {
-      type: Number,
-      default:0
+     status:{
+      type:Boolean,
+      default : false
     },
-    currentAccount: {
-      type: Number,
-      default:0
-    },
-    goal: [{ type: mongoose.Schema.Types.ObjectId, ref: "Goal" , populate: true}],
-    task: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" , populate: true}],
-    requestTask: [{ 
-      type: mongoose.Schema.Types.ObjectId,
-       ref: "RequestTask" , 
-       populate: true}],
 &nbsp;
-&nbsp;
+    // childTask: {
+    //   type: String,
+    //   required: [true, "Please add a password"],
+    // },
+    childId: { type: mongoose.Schema.Types.ObjectId, ref: "Child" },
   },
   {
     timestamps: true,
   }
 );
 &nbsp;
-module.exports = mongoose.model("Child", childSchema);
+module.exports = mongoose.model("Task", taskSchema);
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
