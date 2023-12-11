@@ -160,11 +160,12 @@ const EndTask = asyncHandler(async (req, res) => {
     await createNotification({
       title: 'مهام طفلي',
       body: `${word} ${childObj.name} مهمة ${Tasks.name} بنجاح`,
-      user: parentId
+      user: childObj.parentId
     });
 
     res.status(200).json(updatedTask);
   } catch (error) {
+    console.log({error})
     console.error(error.message);
     res.status(400).json({ error: error.message });
   }
