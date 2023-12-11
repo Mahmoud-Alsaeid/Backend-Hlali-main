@@ -65,6 +65,7 @@ const setRequestTask = asyncHandler(async (req, res) => {
       valueTask,
       time,
       childId,
+      parentId: childObj.parentId
     });
     console.log({childObj})
     const word = childObj.gender === 'male' ? 'قام' : 'قامت'

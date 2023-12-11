@@ -150,7 +150,7 @@ const EndTask = asyncHandler(async (req, res) => {
     /* const child = await Child.findByIdAndUpdate(Tasks.childId, {
       $inc: { currentAccount: Tasks.valueTask },
     }); */
-
+    const childObj = await Child.findById(Tasks.childId)
     const updatedTask = await Task.findByIdAndUpdate(
       req.params.id,
       { status: true },
