@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Child = require("../models/childModel");
 const Goal = require("../models/goalModel");
 const Transaction = require("../models/transactionModel");
+const {  createTransactionHistory } = require('./transaction-history');
 const cron = require('node-cron');
 const {createNotification } = require('./requestTaskController');
 // @desc    Get Goal
@@ -29,16 +30,49 @@ const setTransaction = asyncHandler(async (req, res) => {
       throw new Error("Please provide all required fields");
     }
 
-    await Child.findOneAndUpdate(
+     await Child.findOneAndUpdate(
       { _id: sender },
       { $inc: { currentAccount: -amount } }
     );
 
-    await Child.findByIdAndUpdate(
+     await Child.findByIdAndUpdate(
       { _id: receiver },
       { $inc: { currentAccount: amount } }
     );
-      const ss = await Child.findById(sender)
+    const senderA = await Child.findById(sender)
+    const receiverA =  await Child.findById(receiver)
+    await createTransactionHistory({
+      title: `حوالة الى ${receiverA.name}`,
+      date: new Date(Date.now()).toLocaleString(
+        "ar-SA",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }
+      ),
+      price: -amount,
+      total: senderA.currentAccount,
+      isCurrent: true,
+      user: sender
+    })
+    await createTransactionHistory({
+      title: `حوالة من ${senderA.name}`,
+      date: new Date(Date.now()).toLocaleString(
+        "ar-SA",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }
+      ),
+      price: amount,
+      total: receiverA.currentAccount,
+      isCurrent: true,
+      user: receiver
+    })
+
+    const ss = await Child.findById(sender)
     await createNotification({
       title: 'اخوتي',
       body: `حوالة واردة من ${ss.name}`,
@@ -79,7 +113,37 @@ const internalTransaction = asyncHandler(async (req, res) => {
       },
       { new: true }
     );
-
+    const title = from === "currentAccount" ? `تحويل من الحساب الجاري الى الحساب الادخاري` : `تحويل من الحساب الادخاري الى الحساب الجاري`
+    await createTransactionHistory({
+      title,
+      date: new Date(Date.now()).toLocaleString(
+        "ar-SA",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }
+      ),
+      price: from === "currentAccount" ? -amount : amount,
+      total: internalTransaction.currentAccount,
+      isCurrent: true,
+      user: id
+    })
+    await createTransactionHistory({
+      title,
+      date: new Date(Date.now()).toLocaleString(
+        "ar-SA",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }
+      ),
+      price: from === "currentAccount" ? amount : -amount,
+      total: internalTransaction.savingAccount,
+      isCurrent: false,
+      user: id
+    })
     res.status(200).json(internalTransaction);
   } catch (error) {
     console.error(error.message);
@@ -105,7 +169,7 @@ const scheduleTransaction = async (fatherId, childId, day, amount) => {
           { $inc: { currentAccount: amount } },
           { new: true }
         );
-
+        
         console.log(`Transaction for day ${day}:`, internalTransaction);
       } catch (error) {
         console.error(error.message);

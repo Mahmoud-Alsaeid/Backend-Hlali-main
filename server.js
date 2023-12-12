@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB = require("./config/db");
 const { getNotifications, deleteNotification } = require("./controllers/requestTaskController");
+const {getTransactionHistories} = require('./controllers/transaction-history');
 const port = 3000;
 
 connectDB();
@@ -28,7 +29,7 @@ app.use("/api/requesttask", require("./routes/requestTaskRoutes"));
 app.use("/api/transaction", require("./routes/TransactionRoutes"));
 app.get('/api/notifications', getNotifications);
 app.delete('/api/notifications/:id', deleteNotification);
-
+app.get('/api/transaction-hisories', getTransactionHistories)
 
 
 app.use(errorHandler);

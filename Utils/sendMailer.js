@@ -9,13 +9,13 @@ module.exports = async (email) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "keetup.agency@gmail.com",
-      pass: "Keetup@2023",
+      user: "lilaalmalo1@gmail.com",
+      pass: "La1234567",
     },
   });
 
   const sendEmail = await transporter.sendMail({
-    from:  "keetup.agency@gmail.com",
+    from:  "lilaalmalo1@gmail.com",
     to: email,
     subject: "forget password",
     text: " your code ",

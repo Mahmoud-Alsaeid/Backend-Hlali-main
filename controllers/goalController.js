@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Child = require("../models/childModel");
 const Goal = require("../models/goalModel");
-
+const {  createTransactionHistory } = require('./transaction-history');
 // @desc    Get Goal
 // @route   GET /api/Goal
 // @access  Private
@@ -88,12 +88,17 @@ const internalTransaction = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Please provide the 'amount' field");
     }
+    const ch = await Child.findById(id);
+
+
 
     const internalTransaction = await Child.findOneAndUpdate(
       { _id: id },
       { $inc: { currentAccount: -amount, savingAccount: amount } },
       { new: true }
     );
+    
+    
 
     res.status(200).json(internalTransaction);
   } catch (error) {
@@ -113,11 +118,11 @@ const updatedGoalValue = asyncHandler(async (req, res) => {
 
     const goal = await Goal.findById(req.params.id);
 
-    await Goal.findOneAndUpdate(
+    const newGoal = await Goal.findOneAndUpdate(
       { _id: req.params.id },
       { $inc: { valueGoal: -amount } }
     );
-
+    
     const fieldToUpdate =
       accountType === "currentAccount" ? "currentAccount" : "savingAccount";
 
@@ -126,7 +131,22 @@ const updatedGoalValue = asyncHandler(async (req, res) => {
       { $inc: { [fieldToUpdate]: -amount } },
       { new: true }
     );
-
+    const ch = await Child.findById(req.params.id)
+    await createTransactionHistory({
+      title: newGoal.name,
+      date: new Date(Date.now()).toLocaleString(
+        "ar-SA",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }
+      ),
+      price: -amount,
+      total: ch[fieldToUpdate],
+      isCurrent: fieldToUpdate === 'currentAccount',
+      user: goal.childId
+    })
     res.status(200).json({ internalTransaction });
   } catch (error) {
     console.error(error.message);

@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Child = require("../models/childModel");
 const User = require("../models/userModel");
-
+const {  createTransactionHistory } = require('./transaction-history');
 const Task = require("../models/taskModel");
 const taskModel = require("../models/taskModel");
 const {createNotification} = require('./requestTaskController')
@@ -176,6 +176,22 @@ const FinishTask = asyncHandler(async (req, res) => {
       $inc: { currentAccount: Tasks.valueTask },
     }); 
 
+    const ch = await Child.findById(Tasks.childId)
+    await createTransactionHistory({
+      title: Tasks.name,
+      date: new Date(Date.now()).toLocaleString(
+        "ar-SA",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }
+      ),
+      price: Tasks.valueTask,
+      total: ch.currentAccount,
+      isCurrent: true,
+      user : Tasks.childId
+    })
     await Task.findByIdAndDelete(
       req.params.id
     );
